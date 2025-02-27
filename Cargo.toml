@@ -1,0 +1,15 @@
+[package]
+name = "riscv_app"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+mik32v2_pac = { path = "../mik32v2_pac"}
+
+[profile.dev]
+panic = "abort"
+debug = true
+
+[profile.release]
+panic = "abort"
+debug = true
