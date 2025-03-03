@@ -54,56 +54,6 @@ EXTERN(_start_trap);
    registers, calls the the DefaultHandler ISR, restores caller saved registers and returns. */
 PROVIDE(_start_DefaultHandler_trap = _start_trap);
 
-/* When vectored trap mode is enabled, each interrupt source must implement its own
-   trap entry point. By default, all interrupts start in _start_trap. However, users can
-   override these alias by defining the symbol themselves */
-PROVIDE(_start_SupervisorSoft_trap = _start_DefaultHandler_trap);
-PROVIDE(_start_MachineSoft_trap = _start_DefaultHandler_trap);
-PROVIDE(_start_SupervisorTimer_trap = _start_DefaultHandler_trap);
-PROVIDE(_start_MachineTimer_trap = _start_DefaultHandler_trap);
-PROVIDE(_start_SupervisorExternal_trap = _start_DefaultHandler_trap);
-PROVIDE(_start_MachineExternal_trap = _start_DefaultHandler_trap);
-
-/** EXCEPTION HANDLERS **/
-
-/* Default exception handler. The riscv-rt crate provides a weak alias of this function,
-   which is a busy loop. Users can override this alias by defining the symbol themselves */
-EXTERN(ExceptionHandler);
-
-/* It is possible to define a special handler for each exception type.
-   By default, all exceptions are handled by ExceptionHandler. However, users can
-   override these alias by defining the symbol themselves */
-PROVIDE(InstructionMisaligned = ExceptionHandler);
-PROVIDE(InstructionFault = ExceptionHandler);
-PROVIDE(IllegalInstruction = ExceptionHandler);
-PROVIDE(Breakpoint = ExceptionHandler);
-PROVIDE(LoadMisaligned = ExceptionHandler);
-PROVIDE(LoadFault = ExceptionHandler);
-PROVIDE(StoreMisaligned = ExceptionHandler);
-PROVIDE(StoreFault = ExceptionHandler);
-PROVIDE(UserEnvCall = ExceptionHandler);
-PROVIDE(SupervisorEnvCall = ExceptionHandler);
-PROVIDE(MachineEnvCall = ExceptionHandler);
-PROVIDE(InstructionPageFault = ExceptionHandler);
-PROVIDE(LoadPageFault = ExceptionHandler);
-PROVIDE(StorePageFault = ExceptionHandler);
-
-/** INTERRUPT HANDLERS **/
-
-/* Default interrupt handler. The riscv-rt crate provides a weak alias of this function,
-   which is a busy loop. Users can override this alias by defining the symbol themselves */
-EXTERN(DefaultHandler);
-
-/* It is possible to define a special handler for each interrupt type.
-   By default, all interrupts are handled by DefaultHandler. However, users can
-   override these alias by defining the symbol themselves */
-PROVIDE(SupervisorSoft = DefaultHandler);
-PROVIDE(MachineSoft = DefaultHandler);
-PROVIDE(SupervisorTimer = DefaultHandler);
-PROVIDE(MachineTimer = DefaultHandler);
-PROVIDE(SupervisorExternal = DefaultHandler);
-PROVIDE(MachineExternal = DefaultHandler);
-
 SECTIONS
 {
   .text.dummy (NOLOAD) :
