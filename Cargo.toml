@@ -4,7 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-mik32v2_pac = { path = "../mik32v2_pac"}
+mik32v2-pac = { git = "https://github.com/mik32-rs/mik32v2-pac" }
+riscv = { version = "*", features = ["critical-section-single-hart"]}
 
 [profile.dev]
 panic = "abort"
